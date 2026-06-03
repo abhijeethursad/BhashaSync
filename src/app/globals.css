@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   1. THEME & VARIABLES (Premium Color Palette)
+   ========================================================================== */
+:root {
+  /* Soft Slate-50 instead of blinding pure white */
+  --background: #f8fafc; 
+  --foreground: #0f172a; 
+  /* Custom highlight color when users select text */
+  --selection-bg: none; 
+  --selection-text: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Deep MasterClass/Vercel Dark instead of flat black */
+    --background: #0B1120; 
+    --foreground: #f1f5f9;
+    --selection-bg: none; /* Disable default selection background in dark mode */
+    --selection-text: none;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+}
+
+/* ==========================================================================
+   2. GLOBAL BASE STYLES (The Foundation)
+   ========================================================================== */
+html {
+  /* Makes all scrolling animations butter-smooth globally */
+  scroll-behavior: smooth; 
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  
+  /* Forces text to render incredibly sharp on high-res displays */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Premium Text Selection Override */
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
+}
+
+/* ==========================================================================
+   3. APPLE-STYLE INVISIBLE SCROLLBARS (Light & Dark Mode)
+   ========================================================================== */
+
+/* --- A. Global App Scrollbar (For your white Dashboard pages) --- */
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* A soft, transparent dark-slate thumb for light backgrounds */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(15, 23, 42, 0.15) !important; 
+  border-radius: 20px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(15, 23, 42, 0.3) !important; 
+}
+
+/* --- B. SPECIFIC Dark Mode Scrollbars (For the Learning Page & Playlists) --- */
+.custom-scrollbar::-webkit-scrollbar-thumb,
+body.hide-nav-footer::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15) !important; 
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover,
+body.hide-nav-footer::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.3) !important; 
+}
+
+/* --- C. Bulletproof Firefox Fallbacks --- */
+* {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(15, 23, 42, 0.15) transparent !important;
+}
+
+.custom-scrollbar,
+body.hide-nav-footer {
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent !important;
+}
